@@ -4,7 +4,7 @@ from scipy import stats
 def get_inputs():
     inputs = input("write value of to, tm, tp, separated by comma: ").split(
         ',')
-    return [float(x) for x in inputs]
+    return [float(x) if float(x) != int(x) else int(x) for x in inputs]
 
 
 def get_all():
@@ -20,9 +20,7 @@ def get_all():
         variance_path += ((tp - to)**2) / 36
 
     SD_path = (variance_path)**(1 / 2)
-    print("\nActivity path:")
-    for i in range(n_activity):
-        print("\t".join(path_stack))
+    print("\nActivity path:\n", "\t".join(path_stack))
     print("\n\npath_total (path mean):", path_total)
     print("variance:", variance_path)
     print("SD:", SD_path)
@@ -44,7 +42,7 @@ def get_project_time(specific_event, path_total, SD_path):
 
 
 def run():
-    print("What do you wish to calculate?")
+    print("\n\nWhat do you wish to calculate?")
     print("1. \tPath total, Variance, SD")
     print("2. \tZ score with specified time\n")
     choice = input("1 or 2?\t\t")
@@ -61,7 +59,7 @@ def run():
         print("Wrong input! Try again.")
         run()
 
-    cont = input("Analyzed another path?").lower == "y"
+    cont = input("Analyze another path?\t").lower() == "y"
     if cont:
         run()
 
