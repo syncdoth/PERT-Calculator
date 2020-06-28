@@ -62,6 +62,7 @@ def run():
     cont = input("Analyze another path?\t").lower() == "y"
     if cont:
         run()
+    print("done")
 
 
 if __name__ == "__main__":
